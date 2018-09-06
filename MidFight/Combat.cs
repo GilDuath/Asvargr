@@ -12,6 +12,8 @@ namespace Asvargr
     {
         private List<Opponent> opponents;
 
+        private Opponent activeOpponent;
+
         private string name;
         private int round =1;
         private int maxLP;
@@ -62,36 +64,7 @@ namespace Asvargr
         #endregion
 
 
-        /// <summary>
-        /// Fügt einen neuen Gegener in die Gegnerliste hinzu
-        /// </summary>
-        /// <param name="newOpponent"></param>
-        public void AddOpponent(Opponent newOpponent)
-        {
-            opponents.Add(newOpponent);
-            OnPropertyChanged("GesLP");
-			OnPropertyChanged("OpponentsCount");
-			OnPropertyChanged("OpponentsAlive");
-
-		}
-
-		public void NextRound()
-        {
-            round++;
-			OnPropertyChanged("Round");
-			opponents.ForEach(o => o.NextRound());
-			OnPropertyChanged("OpponentsAlive");
-		}
-
-		public void Reset()
-		{
-			Opponents.ForEach(b => b.Reset());
-			round = 1;
-			OnPropertyChanged("GesLP");
-			OnPropertyChanged("OpponentsCount");
-			OnPropertyChanged("OpponentsAlive");
-
-		}
+      
 		#region Konstruktoren
 
 		public Combat()
@@ -109,8 +82,75 @@ namespace Asvargr
 
         #endregion
 
+        
+        #region Öffentliche Methoden
+
+        /// <summary>
+        /// Fügt einen neuen Gegener in die Gegnerliste hinzu
+        /// </summary>
+        /// <param name="newOpponent"></param>
+        public void AddOpponent(Opponent newOpponent)
+        {
+            opponents.Add(newOpponent);
+            activeOpponent = newOpponent;
+            OnPropertyChanged("GesLP");
+            OnPropertyChanged("OpponentsCount");
+            OnPropertyChanged("OpponentsAlive");
+        }
+
+        public void SetOpponent(Opponent activeOpponent)
+        {
+            this.activeOpponent = activeOpponent;
+        }
+        public Opponent GetActiveOpponent()
+        {
+            return activeOpponent;
+        }
+
+        /// <summary>
+        /// Startet die nächste KampRunde (Resettet alle Activity Flags, Verarbeitet alle Buffs ...)
+        /// </summary>
+        public void NextRound()
+        {
+            round++;
+            OnPropertyChanged("Round");
+            opponents.ForEach(o => o.NextRound());
+            OnPropertyChanged("OpponentsAlive");
+            OnPropertyChanged("GesLP");
+        }
+
+        /// <summary>
+        /// Setzt den Kampf komplett zurück auf die Ausgangswerte
+        /// </summary>
+        public void Reset()
+        {
+            Opponents.ForEach(b => b.Reset());
+            round = 1;
+            OnPropertyChanged("Round");
+            OnPropertyChanged("GesLP");
+            OnPropertyChanged("OpponentsAlive");
+        }
+
+        /// <summary>
+        /// Schaden oder Heilung für den Gegner.  AP und LP müssen Positiv (für Heilung) oder Negativ (Schaden) eingegeben werden
+        /// </summary>
+        /// <param name="lpValue">Der zu verbuchende Schaden/Heal (evtl. Rüstung wird intern abgezogen)</param>
+        /// <param name="apValue">Die zu verbuchende Erschöpfung/Erfrischung</param>
+        /// <param name="opponent">Der Gegner den die Heilung/der Schaden trifft</param>
+        public void DamageOrHeal(int lpValue, int apValue, Opponent opponent)
+        {
+            opponent.AP += apValue;
+            opponent.LP += lpValue;
+
+        }
+
+        public void SetBuff(Buff newBuff, Opponent opponent)
+        {
+            opponent.AddBuff(newBuff);
+        }
 
 
+        #endregion
 
 
 

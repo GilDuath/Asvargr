@@ -84,6 +84,7 @@ namespace Asvargr
 
 
                 OnPropertyChanged("LP");
+                OnPropertyChanged("GesLP");
             }
         }
 
@@ -195,7 +196,7 @@ namespace Asvargr
         }
         #endregion
 
-
+#region Öffentliche Methoden
 
         /// <summary>
         /// Setzt den Gegner wieder auf Aktiv (HasAction=True), zählt alle BuffStacks eins runter und entfernt abgelaufene aus der Liste
@@ -207,8 +208,6 @@ namespace Asvargr
                 hasAction = true;
             }
 
-            OnPropertyChanged("LedBrush");
-
             buffList.ForEach(b => b.NextRound());
 
             for (int i=buffList.Count-1; i>=0; i--)
@@ -218,8 +217,6 @@ namespace Asvargr
                     buffList.Remove(buffList[i]);
                 }
             }
-            OnPropertyChanged("InfoBuff");
-            OnPropertyChanged("InfoDeBuff");
 
             foreach (Buff buff in buffList)
             {
@@ -228,14 +225,17 @@ namespace Asvargr
                     case Bufftype.AP:
                         AP = ap + buff.Value;
                         break;
-                    case Bufftype. LP:
+                    case Bufftype.LP:
                         LP = lp + buff.Value;
                         break;
                     default:
                         break;
-
                 }
             }
+
+            OnPropertyChanged("LedBrush");
+            OnPropertyChanged("InfoBuff");
+            OnPropertyChanged("InfoDeBuff");
         }
 
         /// <summary>
@@ -263,7 +263,10 @@ namespace Asvargr
 			OnPropertyChanged("InfoDeBuff");
 		}
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Property)
         {
             if (PropertyChanged != null)

@@ -21,14 +21,13 @@ namespace Asvargr
     public partial class MainWindow : Window
     {
         Combat combat = new Combat("Oger Überfall");
-		Opponent activeOpponent;
 
         public MainWindow()
         {
             InitializeComponent();
 
             lbOpponents.ItemsSource = combat.Opponents;
-            spDetailInfo.DataContext = combat;
+            spDetailInfo.DataContext = combat.GetActiveOpponent();
             spHeader.DataContext = combat;
 
         }
@@ -36,9 +35,9 @@ namespace Asvargr
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Grid myX = (System.Windows.Controls.Grid)sender;
-            activeOpponent = (Opponent)myX.DataContext;
+            combat.SetOpponent( (Opponent)myX.DataContext);
 
-            this.spDetailInfo.DataContext = activeOpponent;
+            this.spDetailInfo.DataContext = combat.GetActiveOpponent();
         }
 
 
@@ -130,7 +129,7 @@ namespace Asvargr
 
 		private void btnSetDamage_Click(object sender, RoutedEventArgs e)
 		{
-			activeOpponent.LP -= 5;
+            combat.DamageOrHeal(5, 5, combat.GetActiveOpponent());
 		}
 
 		private void btnSetBuff_Click(object sender, RoutedEventArgs e)
