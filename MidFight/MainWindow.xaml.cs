@@ -13,16 +13,127 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MidFight
+namespace Asvargr
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        Combat combat = new Combat("Oger Überfall");
+
         public MainWindow()
         {
             InitializeComponent();
+
+
+
+ 
+
+            lbOpponents.ItemsSource = combat.Opponents;
+            spDetailInfo.DataContext = combat;
+            spHeader.DataContext = combat;
+
+
+
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Grid myX = (System.Windows.Controls.Grid)sender;
+            Opponent selected = (Opponent)myX.DataContext;
+
+            this.spDetailInfo.DataContext = selected;
+        }
+
+
+        private void LoadDemo1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            combat = new Combat("Oger Überfall");
+            combat.AddOpponent(new Opponent(1, "Grubenunhold", 24, 36) { LP = 20, AP = 10 });
+            combat.AddOpponent(new Opponent(2, "Grubenunhold", 24, 36) { LP = 18, AP = 30 });
+            combat.AddOpponent(new Opponent(3, "Grubenunhold", 24, 36) { LP = 23, AP = 36 });
+            combat.AddOpponent(new Opponent(4, "Oger", 44, 36) { LP = 23, AP = 36 });
+            combat.AddOpponent(new Opponent(5, "Oger", 44, 36) { LP = 23, AP = 36 });
+            combat.AddOpponent(new Opponent(6, "Höllenhund", 64, 0) { LP = 50, AP = 0 });
+            combat.AddOpponent(new Opponent(7, "Höllenhund", 64, 0) { LP = 60, AP = 0 });
+            combat.AddOpponent(new Opponent(8, "Höllenhund", 64, 0) { LP = 64, AP = 0 });
+
+            combat.Opponents[2].AddBuff(new Buff(Bufftype.Angriff, -2, 6));
+            combat.Opponents[2].AddBuff(new Buff(Bufftype.Abwehr, -2, 6));
+            combat.Opponents[2].AddBuff(new Buff(Bufftype.Schaden, 4, 3));
+            combat.Opponents[4].AddBuff(new Buff(Bufftype.Angriff, 2, 6));
+            combat.Opponents[4].AddBuff(new Buff(Bufftype.Abwehr, 2, 6));
+            combat.Opponents[5].AddBuff(new Buff(Bufftype.Aktionen, -2, 6));
+            combat.Opponents[5].AddBuff(new Buff(Bufftype.Schaden, -2, 4));
+            combat.Opponents[5].AddBuff(new Buff(Bufftype.AP, -3, 2));
+            combat.Opponents[6].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
+
+            lbOpponents.ItemsSource = combat.Opponents;
+            spDetailInfo.DataContext = combat.Opponents[0];
+            spHeader.DataContext = combat;
+
+        }
+
+        private void LoadDemo2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            combat = new Combat("Sir Adalbert treibt steuern ein");
+            combat.AddOpponent(new Opponent(1, "Sir Adalbert", 24, 46) { LP = 20, AP = 40 });
+            combat.AddOpponent(new Opponent(2, "Knecht", 24, 36) { LP = 18, AP = 30 });
+            combat.AddOpponent(new Opponent(3, "Knecht", 24, 36) { LP = 23, AP = 36 });
+            combat.AddOpponent(new Opponent(4, "Knecht", 44, 36) { LP = 23, AP = 36 });
+            combat.AddOpponent(new Opponent(5, "Bogenschütze", 19, 36) { LP = 17, AP = 36 });
+            combat.AddOpponent(new Opponent(6, "Bogenschütze", 19, 30) { LP = 10, AP = 13 });
+            combat.AddOpponent(new Opponent(7, "Bogenschütze", 19, 30) { LP = 10, AP = 6 });
+            combat.AddOpponent(new Opponent(8, "Jagdhund", 17, 20) { LP = 2, AP = 0 });
+            combat.AddOpponent(new Opponent(9, "Jagdhund", 17, 20) { LP = 6, AP = 2 });
+
+            combat.Opponents[1].AddBuff(new Buff(Bufftype.Angriff, -2, 6));
+            combat.Opponents[2].AddBuff(new Buff(Bufftype.Abwehr, -2, 6));
+            combat.Opponents[2].AddBuff(new Buff(Bufftype.Schaden, 4, 3));
+            combat.Opponents[4].AddBuff(new Buff(Bufftype.Angriff, 2, 6));
+            combat.Opponents[4].AddBuff(new Buff(Bufftype.Abwehr, 2, 6));
+            combat.Opponents[5].AddBuff(new Buff(Bufftype.Aktionen, -2, 6));
+            combat.Opponents[5].AddBuff(new Buff(Bufftype.Schaden, -2, 4));
+            combat.Opponents[5].AddBuff(new Buff(Bufftype.AP, -3, 2));
+            combat.Opponents[6].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
+            combat.Opponents[0].AddBuff(new Buff(Bufftype.Angriff, -2, 2));
+            combat.Opponents[7].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
+            combat.Opponents[8].AddBuff(new Buff(Bufftype.Aktionen, 1, 3));
+            combat.Opponents[8].AddBuff(new Buff(Bufftype.Angriff, 1, 4));
+
+            lbOpponents.ItemsSource = combat.Opponents;
+            spDetailInfo.DataContext = combat.Opponents[0];
+            spHeader.DataContext = combat;
+
+        }
+
+        private void btnNextRound_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            combat.NextRound();
+        }
+
+        private void btnResetBattle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("ResetBattle");
+        }
+
+        private void btnWeapon1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("Weapon1");
+        }
+
+        private void Scene1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //combat.NextRound();
+            combat.Opponents[2].HasAction = false;
+        }
+
+        private void Scene2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            combat.NextRound();
+            combat.Opponents[3].HasAction = false;
+            combat.Opponents[4].HasAction = false;
         }
     }
 }

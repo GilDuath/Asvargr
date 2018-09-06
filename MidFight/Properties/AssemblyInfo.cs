@@ -7,11 +7,11 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("MidFight")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Asvargr")]
+[assembly: AssemblyDescription("Tool für die Unterstützung eines Pen&Paper Kampfes")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MidFight")]
+[assembly: AssemblyProduct("Asvargr")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

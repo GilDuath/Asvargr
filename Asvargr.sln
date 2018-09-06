@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidFight", "MidFight\MidFight.csproj", "{AD3EFA80-5F4D-4F9C-8C36-BBDE6DA008E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asvargr", "MidFight\Asvargr.csproj", "{AD3EFA80-5F4D-4F9C-8C36-BBDE6DA008E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
