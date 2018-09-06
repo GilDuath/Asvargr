@@ -63,7 +63,26 @@ namespace Asvargr
             get { return lp; }
             set
             {
-                lp = value;
+				//	LP Verändern sich,  Prüfungen durchlaufen
+				//		Nicht über Max;  Hälfte LP -> Hälfte AP; <=0 Keine Aktion mehr
+				if (value > maxLP) { { lp = maxLP; } }
+				else { lp = value; }
+
+				if (lp < maxLP / 2)
+				{
+					if (ap > maxAP / 2)
+					{
+						AP = maxAP / 2;
+					}
+				}
+
+				if (lp <=0) 
+				{
+					IsAlive = false;
+					HasAction = false;
+				}
+
+
                 OnPropertyChanged("LP");
             }
         }
@@ -143,23 +162,23 @@ namespace Asvargr
             }
         }
 
-        public DesignerSerializationVisibility IsAliveVisibility
-        {
-            get
-            {
-                if (isAlive) { return DesignerSerializationVisibility.Visible; }
-                else { return DesignerSerializationVisibility.Hidden; }
-            }
-        }
+        //public DesignerSerializationVisibility IsAliveVisibility
+        //{
+        //    get
+        //    {
+        //        if (isAlive) { return DesignerSerializationVisibility.Visible; }
+        //        else { return DesignerSerializationVisibility.Hidden; }
+        //    }
+        //}
 
-        public DesignerSerializationVisibility HasActionVisibility
-        {
-            get
-            {
-                if (hasAction) { return DesignerSerializationVisibility.Visible; }
-                else { return DesignerSerializationVisibility.Hidden; }
-            }
-        }
+        //public DesignerSerializationVisibility HasActionVisibility
+        //{
+        //    get
+        //    {
+        //        if (hasAction) { return DesignerSerializationVisibility.Visible; }
+        //        else { return DesignerSerializationVisibility.Hidden; }
+        //    }
+        //}
 
         #endregion
 
@@ -226,12 +245,25 @@ namespace Asvargr
         public void AddBuff(Buff newBuff)
         {
             buffList.Add(newBuff);
-            OnPropertyChanged("InfoBuff");
-            OnPropertyChanged("InfoDeBuff");
-        }
+			OnPropertyChanged("InfoBuff");
+			OnPropertyChanged("InfoDeBuff");
+		}
 
+		/// <summary>
+		/// Setzt den Gegner auf Initialwerte Zurück
+		/// </summary>
+		public void Reset()
+		{
+			buffList.Clear();
+			AP = maxAP;
+			LP = maxLP;
+			IsAlive = true;
+			HasAction = true;
+			OnPropertyChanged("InfoBuff");
+			OnPropertyChanged("InfoDeBuff");
+		}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string Property)
         {
             if (PropertyChanged != null)

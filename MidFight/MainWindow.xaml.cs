@@ -21,29 +21,24 @@ namespace Asvargr
     public partial class MainWindow : Window
     {
         Combat combat = new Combat("Oger Überfall");
+		Opponent activeOpponent;
 
         public MainWindow()
         {
             InitializeComponent();
 
-
-
- 
-
             lbOpponents.ItemsSource = combat.Opponents;
             spDetailInfo.DataContext = combat;
             spHeader.DataContext = combat;
-
-
 
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Grid myX = (System.Windows.Controls.Grid)sender;
-            Opponent selected = (Opponent)myX.DataContext;
+            activeOpponent = (Opponent)myX.DataContext;
 
-            this.spDetailInfo.DataContext = selected;
+            this.spDetailInfo.DataContext = activeOpponent;
         }
 
 
@@ -108,25 +103,12 @@ namespace Asvargr
 
         }
 
-        private void btnNextRound_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            combat.NextRound();
-        }
-
-        private void btnResetBattle_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Console.WriteLine("ResetBattle");
-        }
-
-        private void btnWeapon1_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Console.WriteLine("Weapon1");
-        }
-
-        private void Scene1_MouseDown(object sender, MouseButtonEventArgs e)
+    	private void Scene1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //combat.NextRound();
             combat.Opponents[2].HasAction = false;
+			combat.Opponents[2].LP = 0;
+			combat.Opponents[2].IsAlive = false;
         }
 
         private void Scene2_MouseDown(object sender, MouseButtonEventArgs e)
@@ -135,5 +117,37 @@ namespace Asvargr
             combat.Opponents[3].HasAction = false;
             combat.Opponents[4].HasAction = false;
         }
-    }
+
+		private void btnNextRound_Click(object sender, RoutedEventArgs e)
+		{
+			combat.NextRound();
+		}
+
+		private void btnWeapon1_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void btnSetDamage_Click(object sender, RoutedEventArgs e)
+		{
+			activeOpponent.LP -= 5;
+		}
+
+		private void btnSetBuff_Click(object sender, RoutedEventArgs e)
+		{
+			activeOpponent.AddBuff(new Buff(Bufftype.Angriff, -2, 4));
+			activeOpponent.AddBuff(new Buff(Bufftype.LP, -2, 4));
+		}
+
+		private void btnSetHeal_Click(object sender, RoutedEventArgs e)
+		{
+			activeOpponent.LP += 7;
+			activeOpponent.AP += 7;
+		}
+
+		private void btnResetBattle_Click(object sender, RoutedEventArgs e)
+		{
+			combat.Reset();
+		}
+	}
 }

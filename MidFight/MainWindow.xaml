@@ -46,19 +46,19 @@
                 
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Aktiver Gegner ist {Nr} - {Opponent}"  FontSize="10"></TextBlock>
+                        <!--<TextBlock Text="Aktiver Gegner ist {Nr} - {Opponent}"  FontSize="10"></TextBlock>-->
                     <TextBlock>
                         Noch
-                        <TextBlock Text="{Binding OpponentsCount}"/>
-                        Gegner Bereit von
                         <TextBlock Text="{Binding OpponentsAlive}"/>
+                        Gegner Bereit von
+                        <TextBlock Text="{Binding OpponentsCount}"/>
                     </TextBlock>
                     </StackPanel>
                     <TabPanel Width="20"/>
                     <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding GesLP, Mode=OneWay}" Width="130" Margin="12"/>
-                    <TabPanel Width="250" />
-                    <Button Name="btnNextRound" Content="Nächste Runde" FontSize="15" Margin="8" HorizontalAlignment="Right" MouseDown="btnNextRound_MouseDown"></Button>
-                </StackPanel>
+                    <TabPanel Width="25" />
+                <Button Name="btnNextRound" Content="Nächste Runde" FontSize="15" Margin="4" HorizontalAlignment="Right" Click="btnNextRound_Click"></Button>
+            </StackPanel>
             </StackPanel>
             
             <!--    Die Auflistung aller Gegner auf der linken Seite, und rechts die Details zum aktuellen Gegner  Sowie die möglichen Funktionen -->
@@ -136,22 +136,14 @@
                     <TextBlock FontSize="10">
                         AP <TextBlock Text="{Binding AP}" /> / <TextBlock Text="{Binding MaxAP}"/>
                     </TextBlock>
-                    <TabPanel Height="10"></TabPanel>
-                    <TextBlock>
-                        Action =
-                        <TextBlock Text="{Binding HasAction}"/>
-                        Alive =
-                        <TextBlock Text="{Binding IsAlive}"/>
-                    </TextBlock>
-                    <TabPanel Height="10"></TabPanel>
-                    <TextBlock>
-                        Action =
-                        <TextBlock Text="{Binding HasActionVisibility}"/>
-                        Alive =
-                        <TextBlock Text="{Binding IsAliveVisibility}"/>
+                    <TextBlock Margin="3">
+                        <TextBlock Text="{Binding InfoBuff}" FontSize="9" Foreground="DarkGreen" Margin="1"/>
+                        <TextBlock Text="{Binding InfoDeBuff}" FontSize="9" Foreground="DarkRed" Margin="1"/>
                     </TextBlock>
 
-                    <TabPanel Height="10"></TabPanel>
+
+
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -164,17 +156,17 @@
                         </Grid.RowDefinitions>
                         
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Angriff {Waffenwert1}" FontSize="12"/>
-                        <Button Name="btnWeapon1" Grid.Row="0" Grid.Column="1" Content="Angriff" Margin="1" MouseDown="btnWeapon1_MouseDown" />
+                        <Button Name="btnWeapon1" Grid.Row="0" Grid.Column="1" Content="Angriff" Margin="1" Click="btnWeapon1_Click" />
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Angriff {Waffenwert1}" FontSize="12"/>
                         <Button Grid.Row="1" Grid.Column="1" Content="Angriff" Margin="1"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Angriff {Waffenwert1}" FontSize="12"/>
                         <Button Grid.Row="2" Grid.Column="1" Content="Angriff" Margin="1"/>
                     </Grid>
-                    <Button Content="Schaden"/>
-                    <Button Content="DeBuff"/>
-                    <Button Content="Buff/Heilung"/>
+                    <Button Name="btnSetDamage" Content="Schaden" Click="btnSetDamage_Click" />
+                    <Button Name="btnSetBuff" Content="DeBuff" Click="btnSetBuff_Click"/>
+                    <Button Name="btnSetHeal" Content="Buff/Heilung" Click="btnSetHeal_Click"/>
                 </StackPanel>
-                <Button Name="btnResetBattle" Grid.Row="2" Content="Kampf neu starten" FontSize="15" Margin="8" MouseDown="btnResetBattle_MouseDown" ></Button>
+                <Button Name="btnResetBattle" Grid.Row="2" Content="Kampf neu starten" FontSize="15" Margin="8" Click="btnResetBattle_Click" ></Button>
 
             </Grid>
             </Grid>

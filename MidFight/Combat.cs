@@ -80,11 +80,21 @@ namespace Asvargr
             round++;
 			OnPropertyChanged("Round");
 			opponents.ForEach(o => o.NextRound());
-        }
+			OnPropertyChanged("OpponentsAlive");
+		}
 
-        #region Konstruktoren
+		public void Reset()
+		{
+			Opponents.ForEach(b => b.Reset());
+			round = 1;
+			OnPropertyChanged("GesLP");
+			OnPropertyChanged("OpponentsCount");
+			OnPropertyChanged("OpponentsAlive");
 
-        public Combat()
+		}
+		#region Konstruktoren
+
+		public Combat()
         {
             this.name = "NewFight";
             opponents = new List<Opponent>();
