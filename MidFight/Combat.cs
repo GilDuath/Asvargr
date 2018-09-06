@@ -70,14 +70,16 @@ namespace Asvargr
         {
             opponents.Add(newOpponent);
             OnPropertyChanged("GesLP");
-            OnPropertyChanged("MaxLP");
+			OnPropertyChanged("OpponentsCount");
+			OnPropertyChanged("OpponentsAlive");
 
-        }
+		}
 
-        public void NextRound()
+		public void NextRound()
         {
             round++;
-            opponents.ForEach(o => o.NextRound());
+			OnPropertyChanged("Round");
+			opponents.ForEach(o => o.NextRound());
         }
 
         #region Konstruktoren

@@ -8,14 +8,14 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="90"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
             
             <!--    Menuezeile            -->
-            <StackPanel  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Bisque" Margin="4">
+            <!--<StackPanel  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Bisque" Margin="4">
                 <Button Content="Lade Gegnergruppe" Margin="2"></Button>
                 <TabItem/>
                 <Button Content="+ (neuen Gegner hinzufügen)" Margin="2"></Button>
@@ -23,7 +23,7 @@
                 <Button Content="Listansicht anpassen" Margin="2"></Button>
                 <TabItem/>
                 <Button Content="Sonstetwas tun" Margin="2"></Button>
-            </StackPanel>
+            </StackPanel>-->
             
             <!--    Zusammenfasung aktueller Kampfstatus  (Aktuelle Runde; Gegner X von Y ist aktiv [Z sind ausgeschaltet]; Durchschnittswerte für [Angriff, Abw, Schaden]       -->
             <!--        Zur Zeit noch recht einfach gehalten,  sollte aber zukünftig auf ein eigenes Datenobjekt Gebunden werden    -->
@@ -33,7 +33,7 @@
                     <TabPanel Width="20"/>
                     <Label Content="Aktuelle Runde"  Margin="0" FontSize="24"></Label>
                     <TabPanel Width="5"/>
-                    <Label Content="2" Margin="0" FontSize="25" FontWeight="Bold" ></Label>
+                    <Label Content="{Binding Round}" Margin="0" FontSize="25" FontWeight="Bold" ></Label>
                     <TabPanel Width="15"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                         <TextBlock Text="Hier wird mal ein interessanter Text stehen.  Etwas über die Anzahl der Gegener" FontSize="10"/>
@@ -69,23 +69,23 @@
                     <ColumnDefinition Width="175"/>
                 </Grid.ColumnDefinitions>
 
-                <ListBox Name="lbOpponents" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" VerticalAlignment="Stretch" Margin="3">
+                <ListBox Name="lbOpponents" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" Margin="2">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="2" MouseDown="Grid_MouseDown">
+                            <Grid Margin="0" MouseDown="Grid_MouseDown">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="75" MinWidth="75"/>
                                     <ColumnDefinition Width="2*" MinWidth="175"/>
-                                    <ColumnDefinition Width="*" MinWidth="75"/>
+                                    <ColumnDefinition Width="150" MinWidth="75"/>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Icon und Aktionsstatus -->
-                                <StackPanel Grid.Column="0" Margin="3" Orientation="Vertical" Background="Bisque"  VerticalAlignment="Top"  HorizontalAlignment="Stretch" >
-                                    <StackPanel Orientation="Horizontal" Margin="2">
-                                        <TextBlock Text="{Binding Number}" Margin="3" FontSize="30"  />
-                                    <Ellipse Fill="{Binding LedBrush}" Width="15" Height="15" Visibility="{Binding IsAliveVisibility}" />
-                                    <TabPanel Width="5"/>
-                                    <Ellipse Fill="Red" Width="15" Height="15" Visibility="{Binding HasActionVisibility}" />
+                                <StackPanel Grid.Column="0" Margin="0" Orientation="Vertical" Background="Bisque"  VerticalAlignment="Top"  HorizontalAlignment="Stretch" >
+                                    <StackPanel Orientation="Horizontal" Margin="1">
+                                        <TextBlock Text="{Binding Number}" Margin="1" FontSize="30"  />
+                                    <TabPanel Width="15"/>
+                                    <Ellipse Fill="{Binding LedBrush}" Width="20" Height="20" Visibility="{Binding IsAliveVisibility}" />
+                                    <!--<Ellipse Fill="Red" Width="15" Height="15" Visibility="{Binding HasActionVisibility}" />-->
                                     <!--<TextBox Text="Icon" Margin="3"  />-->
                                     </StackPanel>
                                     <!--<StackPanel Orientation="Horizontal" Margin="2" Height="15">
@@ -96,8 +96,8 @@
                                 </StackPanel>
 
                                 <!--    Beschreibung, Angriff und Abwehr    -->
-                                <StackPanel Grid.Column="1" Margin="3" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                    <StackPanel Orientation="Vertical" Margin="2" HorizontalAlignment="Stretch">
+                                <StackPanel Grid.Column="1" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Vertical" Margin="0" HorizontalAlignment="Stretch">
                                         <TextBlock Text="{Binding Name}" Margin="0" FontSize="16" FontWeight="DemiBold" />
                                         <TextBlock Text="Schwert  Ew: 14  1W6+2" Margin="0" FontSize="9" />
                                         <TextBlock Text="Abwehr 16  Rüstung: Leder (2)" Margin="0" FontSize="9" />
@@ -105,13 +105,13 @@
                                 </StackPanel>
 
                                 <!--    LP / AP   Buff/DeBuff  -->
-                                <StackPanel Grid.Column="2" Margin="3" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                    <StackPanel Orientation="Vertical" Margin="2">
+                                <StackPanel Grid.Column="2" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Vertical" Margin="1">
                                         <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding LP}" Margin="2" Height="10" Foreground="Red" ></ProgressBar>
                                         <ProgressBar Minimum="0" Maximum="{Binding MaxAP}" Value="{Binding AP}" Margin="2" Height="10" Foreground="Blue"></ProgressBar>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding InfoBuff}" FontSize="9" Foreground="DarkGreen" Margin="3"/>
-                                        <TextBlock Text="{Binding InfoDeBuff}" FontSize="9" Foreground="DarkRed" Margin="3"/>
+                                        <TextBlock Text="{Binding InfoBuff}" FontSize="9" Foreground="DarkGreen" Margin="1"/>
+                                        <TextBlock Text="{Binding InfoDeBuff}" FontSize="9" Foreground="DarkRed" Margin="1"/>
                                     </StackPanel>
                                 </StackPanel>
                                 </StackPanel>
