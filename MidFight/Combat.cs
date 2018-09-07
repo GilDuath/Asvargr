@@ -113,10 +113,10 @@ namespace Asvargr
         public void NextRound()
         {
             round++;
-            OnPropertyChanged("Round");
             opponents.ForEach(o => o.NextRound());
-            OnPropertyChanged("OpponentsAlive");
             OnPropertyChanged("GesLP");
+            OnPropertyChanged("OpponentsAlive");
+            OnPropertyChanged("Round");
         }
 
         /// <summary>
@@ -126,9 +126,9 @@ namespace Asvargr
         {
             Opponents.ForEach(b => b.Reset());
             round = 1;
-            OnPropertyChanged("Round");
             OnPropertyChanged("GesLP");
             OnPropertyChanged("OpponentsAlive");
+            OnPropertyChanged("Round");
         }
 
         /// <summary>
@@ -141,10 +141,11 @@ namespace Asvargr
         {
             opponent.AP += apValue;
             opponent.LP += lpValue;
-
+            OnPropertyChanged("GesLP");
+            OnPropertyChanged("OpponentsAlive");
         }
 
-        public void SetBuff(Buff newBuff, Opponent opponent)
+        public void AddBuff(Buff newBuff, Opponent opponent)
         {
             opponent.AddBuff(newBuff);
         }

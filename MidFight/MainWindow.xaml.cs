@@ -129,19 +129,18 @@ namespace Asvargr
 
 		private void btnSetDamage_Click(object sender, RoutedEventArgs e)
 		{
-            combat.DamageOrHeal(5, 5, combat.GetActiveOpponent());
-		}
+            combat.DamageOrHeal(-5, -5, combat.GetActiveOpponent());
+        }
 
-		private void btnSetBuff_Click(object sender, RoutedEventArgs e)
+        private void btnSetBuff_Click(object sender, RoutedEventArgs e)
 		{
-			activeOpponent.AddBuff(new Buff(Bufftype.Angriff, -2, 4));
-			activeOpponent.AddBuff(new Buff(Bufftype.LP, -2, 4));
+            combat.AddBuff(new Buff(Bufftype.Angriff, -2, 4), combat.GetActiveOpponent());
+            combat.AddBuff(new Buff(Bufftype.LP, -2, 4), combat.GetActiveOpponent());
 		}
 
 		private void btnSetHeal_Click(object sender, RoutedEventArgs e)
 		{
-			activeOpponent.LP += 7;
-			activeOpponent.AP += 7;
+            combat.DamageOrHeal(7, 7, combat.GetActiveOpponent());
 		}
 
 		private void btnResetBattle_Click(object sender, RoutedEventArgs e)
