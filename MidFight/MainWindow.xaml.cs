@@ -82,19 +82,19 @@ namespace Asvargr
             combat.AddOpponent(new Opponent(8, "Jagdhund", 17, 20) { LP = 2, AP = 0 });
             combat.AddOpponent(new Opponent(9, "Jagdhund", 17, 20) { LP = 6, AP = 2 });
 
-            combat.Opponents[1].AddBuff(new Buff(Bufftype.Angriff, -2, 6));
-            combat.Opponents[2].AddBuff(new Buff(Bufftype.Abwehr, -2, 6));
-            combat.Opponents[2].AddBuff(new Buff(Bufftype.Schaden, 4, 3));
-            combat.Opponents[4].AddBuff(new Buff(Bufftype.Angriff, 2, 6));
-            combat.Opponents[4].AddBuff(new Buff(Bufftype.Abwehr, 2, 6));
-            combat.Opponents[5].AddBuff(new Buff(Bufftype.Aktionen, -2, 6));
-            combat.Opponents[5].AddBuff(new Buff(Bufftype.Schaden, -2, 4));
-            combat.Opponents[5].AddBuff(new Buff(Bufftype.AP, -3, 2));
-            combat.Opponents[6].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
-            combat.Opponents[0].AddBuff(new Buff(Bufftype.Angriff, -2, 2));
-            combat.Opponents[7].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
-            combat.Opponents[8].AddBuff(new Buff(Bufftype.Aktionen, 1, 3));
-            combat.Opponents[8].AddBuff(new Buff(Bufftype.Angriff, 1, 4));
+            //combat.Opponents[1].AddBuff(new Buff(Bufftype.Angriff, -2, 6));
+            //combat.Opponents[2].AddBuff(new Buff(Bufftype.Abwehr, -2, 6));
+            //combat.Opponents[2].AddBuff(new Buff(Bufftype.Schaden, 4, 3));
+            //combat.Opponents[4].AddBuff(new Buff(Bufftype.Angriff, 2, 6));
+            //combat.Opponents[4].AddBuff(new Buff(Bufftype.Abwehr, 2, 6));
+            //combat.Opponents[5].AddBuff(new Buff(Bufftype.Aktionen, -2, 6));
+            //combat.Opponents[5].AddBuff(new Buff(Bufftype.Schaden, -2, 4));
+            //combat.Opponents[5].AddBuff(new Buff(Bufftype.AP, -3, 2));
+            //combat.Opponents[6].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
+            //combat.Opponents[0].AddBuff(new Buff(Bufftype.Angriff, -2, 2));
+            //combat.Opponents[7].AddBuff(new Buff(Bufftype.Aktionen, 1, 6));
+            //combat.Opponents[8].AddBuff(new Buff(Bufftype.Aktionen, 1, 3));
+            //combat.Opponents[8].AddBuff(new Buff(Bufftype.Angriff, 1, 4));
 
             lbOpponents.ItemsSource = combat.Opponents;
             spDetailInfo.DataContext = combat.Opponents[0];

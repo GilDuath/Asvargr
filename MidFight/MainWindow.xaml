@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Asvargr"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0"/>
             <RowDefinition Height="90"/>
@@ -72,11 +73,11 @@
                 <ListBox Name="lbOpponents" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" Margin="2">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0" MouseDown="Grid_MouseDown">
+                            <Grid Margin="0" MouseDown="Grid_MouseDown" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="75" MinWidth="75"/>
                                     <ColumnDefinition Width="2*" MinWidth="175"/>
-                                    <ColumnDefinition Width="150" MinWidth="75"/>
+                                    <ColumnDefinition Width="1*" MinWidth="75"/>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Icon und Aktionsstatus -->
@@ -84,7 +85,12 @@
                                     <StackPanel Orientation="Horizontal" Margin="1">
                                         <TextBlock Text="{Binding Number}" Margin="1" FontSize="30"  />
                                     <TabPanel Width="15"/>
-                                    <Ellipse Fill="{Binding LedBrush}" Width="20" Height="20" Visibility="{Binding IsAliveVisibility}" />
+                                    <Canvas>
+                                        <Ellipse Fill="Black" Width="24" Height="23" Opacity="0.7" Canvas.Left="0" Canvas.Top="11" />
+                                        <Ellipse Fill="{Binding LedBrush}" Width="20" Height="20" Opacity="0.7" Canvas.Left="2" Canvas.Top="12"/>
+                                        <Ellipse Fill="Silver" Width="11" Height="11" Opacity="0.2" Canvas.Left="5" Canvas.Top="16" />
+                                        <Ellipse Fill="White" Width="3" Height="3" Opacity="0.2" Canvas.Left="8" Canvas.Top="20" />
+                                    </Canvas>
                                     <!--<Ellipse Fill="Red" Width="15" Height="15" Visibility="{Binding HasActionVisibility}" />-->
                                     <!--<TextBox Text="Icon" Margin="3"  />-->
                                     </StackPanel>
@@ -96,7 +102,7 @@
                                 </StackPanel>
 
                                 <!--    Beschreibung, Angriff und Abwehr    -->
-                                <StackPanel Grid.Column="1" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                <StackPanel Grid.Column="1" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" >
                                     <StackPanel Orientation="Vertical" Margin="0" HorizontalAlignment="Stretch">
                                         <TextBlock Text="{Binding Name}" Margin="0" FontSize="16" FontWeight="DemiBold" />
                                         <TextBlock Text="Schwert  Ew: 14  1W6+2" Margin="0" FontSize="9" />
@@ -105,10 +111,10 @@
                                 </StackPanel>
 
                                 <!--    LP / AP   Buff/DeBuff  -->
-                                <StackPanel Grid.Column="2" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                <StackPanel Grid.Column="2" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top">
                                     <StackPanel Orientation="Vertical" Margin="1">
-                                        <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding LP}" Margin="2" Height="10" Foreground="Red" ></ProgressBar>
-                                        <ProgressBar Minimum="0" Maximum="{Binding MaxAP}" Value="{Binding AP}" Margin="2" Height="10" Foreground="Blue"></ProgressBar>
+                                    <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding LP}" Margin="2" Height="10" Foreground="Red"  ></ProgressBar>
+                                    <ProgressBar Minimum="0" Maximum="{Binding MaxAP}" Value="{Binding AP}" Margin="2" Height="10" Foreground="Blue" ></ProgressBar>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding InfoBuff}" FontSize="9" Foreground="DarkGreen" Margin="1"/>
                                         <TextBlock Text="{Binding InfoDeBuff}" FontSize="9" Foreground="DarkRed" Margin="1"/>

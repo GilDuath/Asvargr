@@ -30,6 +30,8 @@ namespace Asvargr
         private string infoDeBuff;
 
         private List<Buff> buffList = new List<Buff>() ;
+        private List<Weapon> weaponList = new List<Weapon>();
+
 
 
         #region //Propertys 
@@ -249,10 +251,23 @@ namespace Asvargr
 			OnPropertyChanged("InfoDeBuff");
 		}
 
-		/// <summary>
-		/// Setzt den Gegner auf Initialwerte Zurück
-		/// </summary>
-		public void Reset()
+        /// <summary>
+        /// Fügt eine weitere Waffe zur Liste hinzu
+        /// </summary>
+        /// <param name="newWeapon"></param>
+        public void AddWeapon(Weapon newWeapon)
+        {
+            weaponList.Add(newWeapon);
+            OnPropertyChanged("InfoBuff");
+            OnPropertyChanged("InfoDeBuff");
+        }
+
+
+
+        /// <summary>
+        /// Setzt den Gegner auf Initialwerte Zurück
+        /// </summary>
+        public void Reset()
 		{
 			buffList.Clear();
 			AP = maxAP;

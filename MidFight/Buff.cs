@@ -65,6 +65,7 @@ namespace Asvargr
                     }
                 case Bufftype.Angriff:
                     {
+                        
                         return string.Format("Ang {0}({1})", buffValue, buffStack);
                     }
                 case Bufftype.AP:
