@@ -13,9 +13,9 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-            
-            <!--    Menuezeile            -->
-            <!--<StackPanel  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Bisque" Margin="4">
+
+        <!--    Menuezeile            -->
+        <!--<StackPanel  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Bisque" Margin="4">
                 <Button Content="Lade Gegnergruppe" Margin="2"></Button>
                 <TabItem/>
                 <Button Content="+ (neuen Gegner hinzufügen)" Margin="2"></Button>
@@ -24,108 +24,112 @@
                 <TabItem/>
                 <Button Content="Sonstetwas tun" Margin="2"></Button>
             </StackPanel>-->
-            
-            <!--    Zusammenfasung aktueller Kampfstatus  (Aktuelle Runde; Gegner X von Y ist aktiv [Z sind ausgeschaltet]; Durchschnittswerte für [Angriff, Abw, Schaden]       -->
-            <!--        Zur Zeit noch recht einfach gehalten,  sollte aber zukünftig auf ein eigenes Datenobjekt Gebunden werden    -->
-            <StackPanel Name="spHeader"  Grid.Row="1"  Orientation="Vertical" Background="BurlyWood" Margin="4">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Kampfübersicht" Margin="0" FontSize="24" FontWeight="Bold"></Label>
-                    <TabPanel Width="20"/>
-                    <Label Content="Aktuelle Runde"  Margin="0" FontSize="24"></Label>
-                    <TabPanel Width="5"/>
-                    <Label Content="{Binding Round}" Margin="0" FontSize="25" FontWeight="Bold" ></Label>
-                    <TabPanel Width="15"/>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                        <TextBlock Text="Hier wird mal ein interessanter Text stehen.  Etwas über die Anzahl der Gegener" FontSize="10"/>
-                        <TextBlock Text="So eine Art Beschreibung. Oder einfach Statistische Werte wie Durchschnittsschaden und Erfolgswert" TextWrapping="WrapWithOverflow"  FontSize="10"/>
-                        <TextBlock Text="Hier wird mal ein interessanter Text stehen.  Etwas über die Anzahl der Gegener" FontSize="10"/>
-                    </StackPanel>
+
+        <!--    Zusammenfasung aktueller Kampfstatus  (Aktuelle Runde; Gegner X von Y ist aktiv [Z sind ausgeschaltet]; Durchschnittswerte für [Angriff, Abw, Schaden]       -->
+        <!--        Zur Zeit noch recht einfach gehalten,  sollte aber zukünftig auf ein eigenes Datenobjekt Gebunden werden    -->
+        <StackPanel Name="spHeader"  Grid.Row="1"  Orientation="Vertical" Background="BurlyWood" Margin="4">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Kampfübersicht" Margin="0" FontSize="24" FontWeight="Bold"></Label>
+                <TabPanel Width="20"/>
+                <Label Content="Aktuelle Runde"  Margin="0" FontSize="24"></Label>
+                <TabPanel Width="5"/>
+                <Label Content="{Binding Round}" Margin="0" FontSize="25" FontWeight="Bold" ></Label>
+                <TabPanel Width="15"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Hier wird mal ein interessanter Text stehen.  Etwas über die Anzahl der Gegener" FontSize="10"/>
+                    <TextBlock Text="So eine Art Beschreibung. Oder einfach Statistische Werte wie Durchschnittsschaden und Erfolgswert" TextWrapping="WrapWithOverflow"  FontSize="10"/>
+                    <TextBlock Text="Hier wird mal ein interessanter Text stehen.  Etwas über die Anzahl der Gegener" FontSize="10"/>
                 </StackPanel>
-                
-                <!--    Hier nicht Stackpanel     sondern GRID  machen-->
-                
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <!--<TextBlock Text="Aktiver Gegner ist {Nr} - {Opponent}"  FontSize="10"></TextBlock>-->
+            </StackPanel>
+
+            <!--    Hier nicht Stackpanel     sondern GRID  machen-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="*" MinWidth="200"/>
+                    <ColumnDefinition Width="175"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <!--<TextBlock Text="Aktiver Gegner ist {Nr} - {Opponent}"  FontSize="10"></TextBlock>-->
                     <TextBlock>
                         Noch
                         <TextBlock Text="{Binding OpponentsAlive}"/>
                         Gegner Bereit von
                         <TextBlock Text="{Binding OpponentsCount}"/>
                     </TextBlock>
-                    </StackPanel>
-                    <TabPanel Width="20"/>
-                    <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding GesLP, Mode=OneWay}" Width="130" Margin="12"/>
-                    <TabPanel Width="25" />
-                <Button Name="btnNextRound" Content="Nächste Runde" FontSize="15" Margin="4" HorizontalAlignment="Right" Click="btnNextRound_Click"></Button>
-            </StackPanel>
-            </StackPanel>
-            
-            <!--    Die Auflistung aller Gegner auf der linken Seite, und rechts die Details zum aktuellen Gegner  Sowie die möglichen Funktionen -->
-            <Grid Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="4" Background="Aqua" VerticalAlignment="Stretch"
+                </StackPanel>
+                <ProgressBar Grid.Column="1" Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding GesLP, Mode=OneWay}" Width="130" Margin="12"/>
+                <Button Grid.Column="2" Name="btnNextRound" Content="Nächste Runde" FontSize="15" Margin="4" HorizontalAlignment="Right" Click="btnNextRound_Click"></Button>
+            </Grid>
+        </StackPanel>
+
+        <!--    Die Auflistung aller Gegner auf der linken Seite, und rechts die Details zum aktuellen Gegner  Sowie die möglichen Funktionen -->
+        <Grid Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="4" Background="Aqua" VerticalAlignment="Stretch"
                   MinHeight="150">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MinWidth="200"/>
-                    <ColumnDefinition Width="175"/>
-                </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="200"/>
+                <ColumnDefinition Width="175"/>
+            </Grid.ColumnDefinitions>
 
-                <ListBox Name="lbOpponents" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" Margin="2">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Margin="0" MouseDown="Grid_MouseDown">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="75" MinWidth="75"/>
-                                    <ColumnDefinition Width="2*" MinWidth="175"/>
-                                    <ColumnDefinition Width="150" MinWidth="75"/>
-                                </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Name="lbOpponents" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"  VerticalAlignment="Stretch" Margin="2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0" MouseDown="Grid_MouseDown">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75" MinWidth="75"/>
+                                <ColumnDefinition Width="2*" MinWidth="175"/>
+                                <ColumnDefinition Width="150" MinWidth="75"/>
+                            </Grid.ColumnDefinitions>
 
-                                <!-- Icon und Aktionsstatus -->
-                                <StackPanel Grid.Column="0" Margin="0" Orientation="Vertical" Background="Bisque"  VerticalAlignment="Top"  HorizontalAlignment="Stretch" >
-                                    <StackPanel Orientation="Horizontal" Margin="1">
-                                        <TextBlock Text="{Binding Number}" Margin="1" FontSize="30"  />
+                            <!-- Icon und Aktionsstatus -->
+                            <StackPanel Grid.Column="0" Margin="0" Orientation="Vertical" Background="Bisque"  VerticalAlignment="Top"  HorizontalAlignment="Stretch" >
+                                <StackPanel Orientation="Horizontal" Margin="1">
+                                    <TextBlock Text="{Binding Number}" Margin="1" FontSize="30"  />
                                     <TabPanel Width="15"/>
                                     <Ellipse Fill="{Binding LedBrush}" Width="20" Height="20" Visibility="{Binding IsAliveVisibility}" />
                                     <!--<Ellipse Fill="Red" Width="15" Height="15" Visibility="{Binding HasActionVisibility}" />-->
                                     <!--<TextBox Text="Icon" Margin="3"  />-->
-                                    </StackPanel>
-                                    <!--<StackPanel Orientation="Horizontal" Margin="2" Height="15">
+                                </StackPanel>
+                                <!--<StackPanel Orientation="Horizontal" Margin="2" Height="15">
                                         <Ellipse Fill="GreenYellow" Width="15"/>
                                         <TabPanel Width="15"/>
                                         <Ellipse Fill="Red" Width="15" />
                                     </StackPanel>-->
-                                </StackPanel>
+                            </StackPanel>
 
-                                <!--    Beschreibung, Angriff und Abwehr    -->
-                                <StackPanel Grid.Column="1" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                    <StackPanel Orientation="Vertical" Margin="0" HorizontalAlignment="Stretch">
-                                        <TextBlock Text="{Binding Name}" Margin="0" FontSize="16" FontWeight="DemiBold" />
-                                        <TextBlock Text="Schwert  Ew: 14  1W6+2" Margin="0" FontSize="9" />
-                                        <TextBlock Text="Abwehr 16  Rüstung: Leder (2)" Margin="0" FontSize="9" />
-                                    </StackPanel>
+                            <!--    Beschreibung, Angriff und Abwehr    -->
+                            <StackPanel Grid.Column="1" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Vertical" Margin="0" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Name}" Margin="0" FontSize="16" FontWeight="DemiBold" />
+                                    <TextBlock Text="Schwert  Ew: 14  1W6+2" Margin="0" FontSize="9" />
+                                    <TextBlock Text="Abwehr 16  Rüstung: Leder (2)" Margin="0" FontSize="9" />
                                 </StackPanel>
+                            </StackPanel>
 
-                                <!--    LP / AP   Buff/DeBuff  -->
-                                <StackPanel Grid.Column="2" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                                    <StackPanel Orientation="Vertical" Margin="1">
-                                        <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding LP}" Margin="2" Height="10" Foreground="Red" ></ProgressBar>
-                                        <ProgressBar Minimum="0" Maximum="{Binding MaxAP}" Value="{Binding AP}" Margin="2" Height="10" Foreground="Blue"></ProgressBar>
+                            <!--    LP / AP   Buff/DeBuff  -->
+                            <StackPanel Grid.Column="2" Margin="0" Orientation="Vertical" Background="Bisque" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Vertical" Margin="1">
+                                    <ProgressBar Minimum="0" Maximum="{Binding MaxLP}" Value="{Binding LP}" Margin="2" Height="10" Foreground="Red" ></ProgressBar>
+                                    <ProgressBar Minimum="0" Maximum="{Binding MaxAP}" Value="{Binding AP}" Margin="2" Height="10" Foreground="Blue"></ProgressBar>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding InfoBuff}" FontSize="9" Foreground="DarkGreen" Margin="1"/>
                                         <TextBlock Text="{Binding InfoDeBuff}" FontSize="9" Foreground="DarkRed" Margin="1"/>
                                     </StackPanel>
                                 </StackPanel>
-                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
+
                 <Label Grid.Row="0" Name="btnInfo" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Content="Detail Info" Margin="2"/>
                 <!--    Details zum aktuellen Gegner    -->
                 <StackPanel Name="spDetailInfo" Grid.Row="1" Orientation="Vertical" VerticalAlignment="Stretch" Margin="3" Background="AntiqueWhite">
@@ -154,7 +158,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Angriff {Waffenwert1}" FontSize="12"/>
                         <Button Name="btnWeapon1" Grid.Row="0" Grid.Column="1" Content="Angriff" Margin="1" Click="btnWeapon1_Click" />
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Angriff {Waffenwert1}" FontSize="12"/>
@@ -167,9 +171,9 @@
                     <Button Name="btnSetHeal" Content="Buff/Heilung" Click="btnSetHeal_Click"/>
                 </StackPanel>
                 <Button Name="btnResetBattle" Grid.Row="2" Content="Kampf neu starten" FontSize="15" Margin="8" Click="btnResetBattle_Click" ></Button>
+            </Grid>
+        </Grid>
 
-            </Grid>
-            </Grid>
         <StatusBar Grid.Row="3" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
             <StatusBarItem Content="Lade Demo 1" Name="LoadDemo1" MouseDown="LoadDemo1_MouseDown"/>
             <StatusBarItem Content="Lade Demo 2" Name="LoadDemo2" MouseDown="LoadDemo2_MouseDown"/>
@@ -177,7 +181,6 @@
             <StatusBarItem Content="Scene1" Name="Scene1" MouseDown="Scene1_MouseDown"/>
             <StatusBarItem Content="Scene2" Name="Scene2" MouseDown="Scene2_MouseDown"/>
         </StatusBar>
-
     </Grid>
 
 </Window>
